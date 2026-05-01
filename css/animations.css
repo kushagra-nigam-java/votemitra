@@ -1,0 +1,58 @@
+/* VOTEमित्र — Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,111,0,0.15); }
+  50% { box-shadow: 0 0 40px rgba(255,111,0,0.3); }
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes dashDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+.hero-exit {
+  animation: fadeOut 0.6s ease forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-30px); }
+}
+.content-enter {
+  animation: scaleIn 0.4s ease both;
+}
+.action-item {
+  animation: slideInLeft 0.4s ease both;
+}
+.option-card {
+  animation: fadeInUp 0.45s ease both;
+}
+.option-pressed {
+  transform: scale(0.96) !important;
+  opacity: 0.7 !important;
+}
+.app-visible {
+  animation: fadeIn 0.5s ease both;
+}

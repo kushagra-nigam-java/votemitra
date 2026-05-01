@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VOTEमित्र</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* VOTEमित्र — Core Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
+
+:root {
+  --primary: #1A237E;
+  --secondary: #FF6F00;
+  --accent: #00897B;
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --card: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.08);
+  --text: #e5e7eb;
+  --text-dim: #9ca3af;
+  --text-bright: #f9fafb;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #10b981;
+  --info: #3b82f6;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* === HERO === */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255,111,0,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(0,137,123,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(26,35,126,0.20) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,111,0,0.1);
+  border: 1px solid rgba(255,111,0,0.25);
+  color: var(--secondary);
+  padding: 6px 18px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease both;
+}
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 800;
+  color: var(--text-bright);
+  margin-bottom: 0.5rem;
+  animation: fadeInUp 0.7s ease 0.1s both;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--secondary), #ff9800, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--text-dim);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.7s ease 0.2s both;
+}
+.hero-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--secondary), #e65100);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 16px 40px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: fadeInUp 0.7s ease 0.3s both, pulseGlow 3s infinite 1s;
+}
+.hero-start:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(255,111,0,0.35);
+}
+.hero-features {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 0.7s ease 0.5s both;
+}
+.hero-feat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+.hero-feat-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.hfi-1 { background: rgba(255,111,0,0.15); color: var(--secondary); }
+.hfi-2 { background: rgba(0,137,123,0.15); color: var(--accent); }
+.hfi-3 { background: rgba(59,130,246,0.15); color: var(--info); }
+
+/* Decorative floating shapes */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: heroFloat 6s ease-in-out infinite;
+}
+.hs-1 { width:300px;height:300px;top:-80px;right:-80px;background:radial-gradient(circle,rgba(255,111,0,0.06),transparent 70%);animation-delay:0s; }
+.hs-2 { width:250px;height:250px;bottom:-60px;left:-60px;background:radial-gradient(circle,rgba(0,137,123,0.06),transparent 70%);animation-delay:2s; }
+.hs-3 { width:200px;height:200px;top:40%;left:10%;background:radial-gradient(circle,rgba(26,35,126,0.06),transparent 70%);animation-delay:4s; }
+
+/* === MAIN APP === */
+.main-app {
+  display: none;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 4rem;
+}
+.app-visible { display: block; }
+
+/* Header */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.app-logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+.app-logo span { color: var(--secondary); }
+
+/* Back button */
+.back-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  color: var(--text-dim);
+  padding: 8px 18px;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+.back-btn:hover { color: var(--text-bright); border-color: rgba(255,255,255,0.2); }
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 1.2rem;
+  font-size: 0.8rem;
+  min-height: 20px;
+}
+.crumb { color: var(--text-dim); }
+.crumb-link { cursor: pointer; transition: color 0.2s; }
+.crumb-link:hover { color: var(--secondary); }
+.crumb-active { color: var(--text-bright); font-weight: 600; }
+.crumb-sep { color: rgba(255,255,255,0.15); margin: 0 2px; }
+
+/* === VRL WIDGET === */
+.vrl-widget {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(12px);
+}
+.vrl-gauge-wrap {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+}
+.vrl-gauge { width: 100%; height: 100%; transform: rotate(-90deg); }
+.vrl-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 8; }
+.vrl-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.8s ease, stroke 0.5s ease;
+}
+.vrl-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.vrl-info { flex: 1; }
+.vrl-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+.vrl-stage { font-size: 1rem; font-weight: 700; margin: 2px 0; }
+.vrl-step { font-size: 0.82rem; color: var(--text-dim); }
+
+/* === CONTENT BLOCKS === */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(26,35,126,0.15), rgba(0,137,123,0.08));
+  border: 1px solid rgba(26,35,126,0.25);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.status-step { color: var(--info); }
+.status-vrl { color: var(--accent); }
+
+.context-block, .guidance-block, .actions-block {
+  margin-bottom: 1.5rem;
+}
+.context-label, .guidance-label, .actions-label, .options-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 0.5rem;
+}
+.context-text {
+  font-size: 1.08rem;
+  color: var(--text-bright);
+  font-weight: 500;
+  line-height: 1.7;
+}
+.guidance-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* Action Steps */
+.actions-list {
+  list-style: none;
+  counter-reset: actions;
+}
+.action-item {
+  counter-increment: actions;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  transition: border-color 0.2s;
+}
+.action-item:hover { border-color: rgba(255,255,255,0.15); }
+.action-item::before {
+  content: counter(actions);
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59,130,246,0.12);
+  color: var(--info);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-top: 1px;
+}
+
+/* Critical Block */
+.critical-block {
+  display: flex;
+  gap: 12px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 1.5rem;
+}
+.critical-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,158,11,0.15);
+  color: var(--warning);
+  font-weight: 800;
+  border-radius: 50%;
+  font-size: 0.85rem;
+}
+.critical-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--warning);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+.critical-text { font-size: 0.88rem; color: var(--text); line-height: 1.6; }
+
+/* === OPTIONS === */
+.options-block { margin-top: 2rem; }
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.option-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: all 0.25s;
+}
+.option-card:hover {
+  border-color: var(--secondary);
+  background: rgba(255,111,0,0.05);
+  transform: translateX(6px);
+}
+.option-letter {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,111,0,0.1);
+  color: var(--secondary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+.option-text { flex: 1; font-weight: 500; }
+.option-arrow {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  transition: transform 0.25s, color 0.25s;
+}
+.option-card:hover .option-arrow {
+  transform: translateX(4px);
+  color: var(--secondary);
+}
+
+/* Init page: 2-column grid for initial 6 options */
+.options-init {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Location selector */
+.location-selector { margin-bottom: 1.5rem; }
+.loc-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.loc-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.loc-select:focus { border-color: var(--secondary); }
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--card-border);
+  margin-top: 3rem;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 640px) {
+  .options-init {
+    grid-template-columns: 1fr;
+  }
+  .hero-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .vrl-widget {
+    padding: 0.8rem 1rem;
+  }
+  .main-app {
+    padding: 1rem 1rem 3rem;
+  }
+}
+
+/* VOTEमित्र — Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255,111,0,0.15); }
+  50% { box-shadow: 0 0 40px rgba(255,111,0,0.3); }
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes dashDraw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes rotateIn {
+  from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+.hero-exit {
+  animation: fadeOut 0.6s ease forwards;
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-30px); }
+}
+.content-enter {
+  animation: scaleIn 0.4s ease both;
+}
+.action-item {
+  animation: slideInLeft 0.4s ease both;
+}
+.option-card {
+  animation: fadeInUp 0.45s ease both;
+}
+.option-pressed {
+  transform: scale(0.96) !important;
+  opacity: 0.7 !important;
+}
+.app-visible {
+  animation: fadeIn 0.5s ease both;
+}
+
+  </style>
+</head>
+<body>
+  <section class="hero" id="hero-section">
+    <div class="hero-shape hs-1"></div>
+    <div class="hero-shape hs-2"></div>
+    <div class="hero-shape hs-3"></div>
+    <div class="hero-badge">Trusted Civic Navigation for India</div>
+    <h1 class="hero-title">VOTE<span>मित्र</span></h1>
+    <p class="hero-sub">Your personal election navigator. Get step-by-step guidance through voter registration, election timelines, and everything in between.</p>
+    <button class="hero-start" id="hero-start-btn">Begin Your Journey <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <div class="hero-features">
+      <div class="hero-feat"><div class="hero-feat-icon hfi-1">&#9745;</div><span>Registration Help</span></div>
+      <div class="hero-feat"><div class="hero-feat-icon hfi-2">&#9201;</div><span>Election Timelines</span></div>
+      <div class="hero-feat"><div class="hero-feat-icon hfi-3">&#9432;</div><span>Issue Resolution</span></div>
+    </div>
+  </section>
+  <main class="main-app" id="main-app">
+    <header class="app-header">
+      <div class="app-logo">VOTE<span>मित्र</span></div>
+      <button class="back-btn" id="back-btn"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+    </header>
+    <div id="vrl-container"></div>
+    <nav id="breadcrumbs" class="breadcrumbs"></nav>
+    <section id="flow-content"></section>
+    <footer class="app-footer">VOTEमित्र — Non-partisan civic navigation. Data sourced from Election Commission of India (eci.gov.in).</footer>
+  </main>
+  <script>
+// VOTEमित्र — Decision Tree Data
+const FLOW_DATA = {
+  init: {
+    id: 'init', step: 'Start', vrl: 5,
+    context: "Welcome to VOTEमित्र — Your Personal Election Navigator. Let's determine where you are in your voting journey.",
+    guidance: 'Choose your situation below to get personalized, step-by-step guidance through the Indian election process.',
+    actions: [],
+    critical: '',
+    options: [
+      { label: 'I am a first-time voter', next: 'first_time_1' },
+      { label: 'I moved to a new city', next: 'migration_1' },
+      { label: 'My name is missing from the voter list', next: 'missing_1' },
+      { label: 'I want to check my voting date', next: 'timeline_1' },
+      { label: 'I already voted / want to know what happens next', next: 'post_vote_1' },
+      { label: "I'm not sure where to start", next: 'unsure_1' }
+    ]
+  },
+
+  // === FIRST-TIME VOTER ===
+  first_time_1: {
+    id: 'first_time_1', step: 'Eligibility Check', vrl: 15,
+    context: 'Great! Let us first confirm your eligibility to vote in Indian elections.',
+    guidance: 'To register as a voter in India, you must meet all of the following criteria:',
+    actions: [
+      'You must be an Indian citizen.',
+      'You must be at least 18 years old on the qualifying date (January 1 of the year of electoral roll revision).',
+      'You must be a resident of the constituency where you wish to register.',
+      'You must not be disqualified under any law (e.g., unsound mind, corrupt practices).'
+    ],
+    critical: 'The qualifying date for age is January 1 of the current year. If you turn 18 after January 1, you may have to wait for the next revision unless a special drive is announced.',
+    options: [
+      { label: 'I meet all criteria — help me register', next: 'first_time_2' },
+      { label: 'I am not yet 18', next: 'first_time_underage' },
+      { label: 'I am an NRI — can I vote?', next: 'first_time_nri' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+  first_time_2: {
+    id: 'first_time_2', step: 'Registration Process', vrl: 30,
+    context: 'You are eligible. Now let us get you registered on the electoral roll.',
+    guidance: 'You need to fill Form 6 (Application for Inclusion of Name in Electoral Roll). You can do this online or offline.',
+    actions: [
+      'Online: Visit the National Voters Service Portal (voters.eci.gov.in) or download the Voter Helpline App.',
+      'Click on "New Voter Registration" and select Form 6.',
+      'Fill in your personal details: name, age, address, family member already on the roll.',
+      'Upload documents: passport-size photo, age proof (birth certificate, 10th marksheet, or passport), address proof (Aadhaar, utility bill, bank passbook).',
+      'Submit the form and note down your Reference ID.'
+    ],
+    critical: 'Keep your Reference ID safe. You will need it to track your application status.',
+    options: [
+      { label: 'I submitted the form — what next?', next: 'first_time_3' },
+      { label: 'I want to register offline instead', next: 'first_time_offline' },
+      { label: 'What documents do I need?', next: 'docs_1' },
+      { label: 'Go back', next: 'first_time_1' }
+    ]
+  },
+  first_time_3: {
+    id: 'first_time_3', step: 'Verification', vrl: 50,
+    context: 'Your application is submitted. Here is what happens during verification.',
+    guidance: 'After submission, a Booth Level Officer (BLO) will visit your address for physical verification. This is a standard process.',
+    actions: [
+      'The BLO will visit your residence to verify your identity and address.',
+      'Keep your original documents ready for inspection.',
+      'If you are not home, the BLO may leave a notice — respond promptly.',
+      'You can track your application status on the NVSP portal using your Reference ID.',
+      'Once approved, your name will appear on the electoral roll and you will receive your EPIC (Voter ID card).'
+    ],
+    critical: 'BLO visits usually happen within 15–30 days of application. If nobody visits within 45 days, file a follow-up on the NVSP portal or call 1950 (Voter Helpline).',
+    options: [
+      { label: 'My application was approved!', next: 'first_time_ready' },
+      { label: 'My application was rejected — what do I do?', next: 'first_time_rejected' },
+      { label: 'Nobody visited me yet', next: 'first_time_no_visit' },
+      { label: 'Go back', next: 'first_time_2' }
+    ]
+  },
+  first_time_ready: {
+    id: 'first_time_ready', step: 'Ready to Vote', vrl: 85,
+    context: 'Congratulations! You are now a registered voter.',
+    guidance: 'Your name is on the electoral roll and you are ready to vote. Here is how to prepare for election day.',
+    actions: [
+      'Find your polling booth: visit voters.eci.gov.in or use the Voter Helpline App.',
+      'Carry a valid photo ID on election day (EPIC is preferred, but 11 other IDs are accepted).',
+      'Check your constituency and candidate list before election day.',
+      'Voting hours are typically 7:00 AM to 6:00 PM — plan to arrive early.',
+      'After voting, you will receive an indelible ink mark on your finger.'
+    ],
+    critical: 'Election day is a paid holiday. Your employer cannot deny you time to vote.',
+    options: [
+      { label: 'What ID can I carry if I lost my Voter ID?', next: 'docs_1' },
+      { label: 'How does the EVM/VVPAT work?', next: 'post_vote_evm' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  first_time_underage: {
+    id: 'first_time_underage', step: 'Not Yet Eligible', vrl: 10,
+    context: 'You are not yet eligible to vote, but you can prepare ahead of time.',
+    guidance: 'If you will turn 18 before January 1 of the next year, you can pre-register during special enrollment drives.',
+    actions: [
+      'Check if your state has an upcoming Special Summary Revision (usually Oct–Nov each year).',
+      'Download the Voter Helpline App and set a reminder.',
+      'Gather your documents in advance: age proof, address proof, passport photo.',
+      'Encourage eligible friends and family to register and vote.'
+    ],
+    critical: 'You cannot vote until your name appears on the final electoral roll after turning 18.',
+    options: [
+      { label: 'What documents should I prepare?', next: 'docs_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  first_time_nri: {
+    id: 'first_time_nri', step: 'NRI Voting', vrl: 15,
+    context: 'NRI citizens can register as overseas electors under the Representation of the People Act.',
+    guidance: 'As an NRI, you can vote in person at your constituency polling booth. Postal ballot for NRIs has been proposed but is not yet implemented as of 2024.',
+    actions: [
+      'Fill Form 6A (Application for Registration as Overseas Elector) on the NVSP portal.',
+      'Upload a self-attested copy of your valid Indian passport.',
+      'Your name will be added to the electoral roll of your original constituency.',
+      'You must be physically present at the polling booth on election day to vote.',
+      'Carry your original Indian passport as your identity document.'
+    ],
+    critical: 'NRI voters must vote in person — no proxy or postal voting is currently available for overseas electors.',
+    options: [
+      { label: 'Go back', next: 'first_time_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  first_time_offline: {
+    id: 'first_time_offline', step: 'Offline Registration', vrl: 25,
+    context: 'You can also register offline by submitting a physical Form 6.',
+    guidance: 'Visit your nearest Electoral Registration Office (ERO) or contact your local BLO.',
+    actions: [
+      'Download Form 6 from eci.gov.in or collect it from the ERO office.',
+      'Fill it in legibly with blue/black ink.',
+      'Attach two passport-size photos, age proof, and address proof (self-attested photocopies).',
+      'Submit the form to the ERO or hand it to your BLO.',
+      'Collect the acknowledgment receipt with your Reference ID.'
+    ],
+    critical: 'Processing time for offline forms may be longer. Online submission is recommended for faster tracking.',
+    options: [
+      { label: 'What happens after I submit?', next: 'first_time_3' },
+      { label: 'Go back', next: 'first_time_2' }
+    ]
+  },
+  first_time_rejected: {
+    id: 'first_time_rejected', step: 'Application Rejected', vrl: 20,
+    context: 'Your application was rejected. Do not worry — most rejections are fixable.',
+    guidance: 'Common reasons for rejection include incomplete documents, unclear photos, or address mismatch.',
+    actions: [
+      'Check the rejection reason on the NVSP portal using your Reference ID.',
+      'Common fixes: re-upload a clearer photo, correct your address, or provide additional documents.',
+      'Re-submit Form 6 with the corrections.',
+      'If you believe the rejection is incorrect, file an appeal with the ERO.',
+      'Call 1950 (Voter Helpline) for assistance.'
+    ],
+    critical: 'You have the right to appeal a rejection. Contact your District Election Officer if the issue persists.',
+    options: [
+      { label: 'Re-submit my application', next: 'first_time_2' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  first_time_no_visit: {
+    id: 'first_time_no_visit', step: 'Follow Up', vrl: 35,
+    context: 'If no BLO has visited you, here is how to follow up.',
+    guidance: 'Delays can happen due to high application volume. Take proactive steps.',
+    actions: [
+      'Track your application on voters.eci.gov.in using your Reference ID.',
+      'Call 1950 (Voter Helpline) and provide your Reference ID.',
+      'Visit your local ERO office in person with your application receipt.',
+      'You can also reach out via the Voter Helpline App grievance section.'
+    ],
+    critical: 'Do not wait too long. If an election is approaching, escalate immediately through the helpline.',
+    options: [
+      { label: 'Go back', next: 'first_time_3' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+
+  // === MIGRATION ===
+  migration_1: {
+    id: 'migration_1', step: 'Migration Assessment', vrl: 15,
+    context: 'You have moved to a new city. Let us figure out the best approach for you.',
+    guidance: 'You have two main options: transfer your voter registration to your new city, or travel back to your old constituency to vote.',
+    actions: [
+      'Option 1: Transfer your registration (recommended if you plan to stay in the new city long-term).',
+      'Option 2: Travel back to your original constituency on election day.',
+      'Consider: transfer takes 4–6 weeks. If an election is imminent, traveling back may be more practical.'
+    ],
+    critical: 'You can only vote in the constituency where your name appears on the electoral roll. Voting in the wrong constituency is not allowed.',
+    options: [
+      { label: 'I want to transfer my registration', next: 'migration_transfer' },
+      { label: 'I will travel back to vote', next: 'migration_travel' },
+      { label: 'How long does transfer take?', next: 'migration_timeline' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+  migration_transfer: {
+    id: 'migration_transfer', step: 'Transfer Registration', vrl: 35,
+    context: 'Let us transfer your voter registration to your new address.',
+    guidance: 'You need to fill Form 6 for inclusion in the new constituency. Your name will be removed from the old roll automatically.',
+    actions: [
+      'Visit voters.eci.gov.in or use the Voter Helpline App.',
+      'Fill Form 6 — select "Shifting from another constituency" as the reason.',
+      'Provide your new address proof (rental agreement, utility bill, Aadhaar with updated address).',
+      'Upload your existing EPIC number and details of your old constituency.',
+      'Submit and note your Reference ID.'
+    ],
+    critical: 'Your old voter registration will be automatically cancelled once the new one is approved. You cannot be registered in two places.',
+    options: [
+      { label: 'What happens after I submit?', next: 'first_time_3' },
+      { label: 'Go back', next: 'migration_1' }
+    ]
+  },
+  migration_travel: {
+    id: 'migration_travel', step: 'Travel to Vote', vrl: 60,
+    context: 'You have decided to travel back to your original constituency to vote.',
+    guidance: 'Make sure your name is still on the electoral roll in your old constituency.',
+    actions: [
+      'Verify your name on the voter list: visit voters.eci.gov.in or call 1950.',
+      'Plan your travel in advance — book tickets early as election dates see heavy demand.',
+      'Carry your EPIC or any valid photo ID.',
+      'Find your polling booth location using the Voter Helpline App.',
+      'Election day is a paid holiday — inform your employer in advance.'
+    ],
+    critical: 'If your name has been removed from the old constituency roll (due to BLO updates), you will not be able to vote. Verify well in advance.',
+    options: [
+      { label: 'How do I check if my name is on the list?', next: 'missing_1' },
+      { label: 'Go back', next: 'migration_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  migration_timeline: {
+    id: 'migration_timeline', step: 'Transfer Timeline', vrl: 20,
+    context: 'Here is the typical timeline for a voter registration transfer.',
+    guidance: 'The process involves application submission, BLO verification at your new address, and approval by the ERO.',
+    actions: [
+      'Application submission: Day 1.',
+      'BLO verification visit: Within 15–30 days.',
+      'ERO approval and roll update: 7–15 days after verification.',
+      'Total estimated time: 4–6 weeks in normal circumstances.',
+      'During election periods, processing may be faster due to special drives.'
+    ],
+    critical: 'If an election is less than 6 weeks away and you have not started the transfer, consider traveling back to your old constituency instead.',
+    options: [
+      { label: 'Start the transfer process', next: 'migration_transfer' },
+      { label: 'I will travel back instead', next: 'migration_travel' },
+      { label: 'Go back', next: 'migration_1' }
+    ]
+  },
+
+  // === MISSING NAME ===
+  missing_1: {
+    id: 'missing_1', step: 'Voter List Check', vrl: 20,
+    context: 'Let us check if your name is on the electoral roll and fix any issues.',
+    guidance: 'There are several ways to search for your name on the voter list.',
+    actions: [
+      'Online: Visit voters.eci.gov.in > "Search in Electoral Roll".',
+      'By App: Download the Voter Helpline App and search by name or EPIC number.',
+      'By SMS: Send SMS "EPIC <your EPIC number>" to 1950.',
+      'By Phone: Call 1950 (Voter Helpline) and provide your details.'
+    ],
+    critical: 'Search using multiple methods. Sometimes names appear with slight spelling variations.',
+    options: [
+      { label: 'My name is on the list!', next: 'first_time_ready' },
+      { label: 'My name is NOT on the list', next: 'missing_2' },
+      { label: 'My name has errors (wrong spelling, address, etc.)', next: 'missing_correction' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+  missing_2: {
+    id: 'missing_2', step: 'Name Missing — Action', vrl: 15,
+    context: 'Your name is missing from the electoral roll. Here are the steps to fix this.',
+    guidance: 'Your name may have been removed during a routine revision, or it may never have been added. Either way, you can re-apply.',
+    actions: [
+      'File Form 6 for fresh inclusion — same process as new registration.',
+      'Visit voters.eci.gov.in or use the Voter Helpline App.',
+      'If you had a previous EPIC number, mention it in the form.',
+      'Contact your local BLO — they can help expedite the process.',
+      'If an election is imminent, visit the ERO office in person for urgent processing.'
+    ],
+    critical: 'If election day is within 2 weeks and your name is missing, you will likely not be able to vote in this election. Start the process immediately for the next one.',
+    options: [
+      { label: 'Start new registration', next: 'first_time_2' },
+      { label: 'Go back', next: 'missing_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  missing_correction: {
+    id: 'missing_correction', step: 'Correction Process', vrl: 40,
+    context: 'Your name is on the list but has errors. Let us correct them.',
+    guidance: 'Use Form 8 to correct details in your existing voter registration.',
+    actions: [
+      'Visit voters.eci.gov.in > "Correction of Entries in Electoral Roll".',
+      'Select Form 8 and choose what needs correction (name, age, address, photo, etc.).',
+      'Upload supporting documents for the correction.',
+      'Submit and note your Reference ID.',
+      'The BLO may visit for verification depending on the type of correction.'
+    ],
+    critical: 'Minor corrections (spelling) are usually processed within 1–2 weeks. Major corrections (address change to another constituency) may require Form 6 instead.',
+    options: [
+      { label: 'I submitted the correction', next: 'first_time_3' },
+      { label: 'Go back', next: 'missing_1' }
+    ]
+  },
+
+  // === TIMELINE ===
+  timeline_1: {
+    id: 'timeline_1', step: 'Election Timeline', vrl: 30,
+    context: 'Let us find out your election dates and help you prepare.',
+    guidance: 'Indian elections can be phased across multiple dates. Your voting date depends on your constituency.',
+    actions: [
+      'Visit eci.gov.in for the official election schedule.',
+      'Check the Voter Helpline App for your constituency-specific date.',
+      'General Elections are held every 5 years. State elections follow separate schedules.',
+      'By-elections may be called for vacant seats at any time.'
+    ],
+    critical: 'Once the Election Commission announces dates, the Model Code of Conduct comes into effect immediately. Campaign rules change.',
+    options: [
+      { label: 'I know my date — help me prepare', next: 'first_time_ready' },
+      { label: 'I want to understand the phases', next: 'timeline_phases' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+  timeline_phases: {
+    id: 'timeline_phases', step: 'Election Phases', vrl: 40,
+    context: 'Indian general elections are conducted in multiple phases across the country.',
+    guidance: 'The Election Commission divides constituencies into phases based on security requirements, logistics, and geography.',
+    actions: [
+      'Phase dates and constituencies are announced by the ECI well in advance.',
+      'Each phase covers specific parliamentary/assembly constituencies.',
+      'Results are counted on a single date after all phases are complete.',
+      'You vote only in YOUR constituency on YOUR phase date.',
+      'Check eci.gov.in or the Voter Helpline App for your specific phase.'
+    ],
+    critical: 'You cannot vote in a different phase. Make sure you know which phase covers your constituency.',
+    options: [
+      { label: 'Help me prepare for election day', next: 'first_time_ready' },
+      { label: 'Go back', next: 'timeline_1' }
+    ]
+  },
+
+  // === POST-VOTE ===
+  post_vote_1: {
+    id: 'post_vote_1', step: 'Post-Voting', vrl: 95,
+    context: 'You have voted! Here is what happens after you cast your ballot.',
+    guidance: 'The journey from ballot to result involves several transparent steps designed to ensure fair counting.',
+    actions: [
+      'After polling closes, EVMs are sealed and transported to a central counting center under security escort.',
+      'Counting day: EVMs are opened in front of candidates/agents and media.',
+      'VVPAT slips from randomly selected booths are matched with EVM counts for verification.',
+      'Results are declared constituency by constituency on counting day.',
+      'The winning candidate receives a Certificate of Election from the Returning Officer.'
+    ],
+    critical: 'Counting day results are usually available by evening. Follow results on results.eci.gov.in.',
+    options: [
+      { label: 'How does the EVM / VVPAT work?', next: 'post_vote_evm' },
+      { label: 'What is NOTA?', next: 'post_vote_nota' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  post_vote_evm: {
+    id: 'post_vote_evm', step: 'EVM & VVPAT', vrl: 95,
+    context: 'Understanding how the Electronic Voting Machine and VVPAT work.',
+    guidance: 'India uses a three-unit system: Ballot Unit, Control Unit, and VVPAT.',
+    actions: [
+      'Ballot Unit: Displays candidate names and symbols. You press the button next to your choice.',
+      'Control Unit: Operated by the presiding officer. Records votes securely.',
+      'VVPAT: After you press the button, a printed slip shows your vote for 7 seconds before dropping into a sealed box.',
+      'EVMs are standalone machines — they are NOT connected to any network or the internet.',
+      'Each EVM is tested multiple times (First Level Check, mock poll on election morning) before use.'
+    ],
+    critical: 'If the VVPAT slip does not match your choice, you can report it immediately to the presiding officer. You have the right to a test vote.',
+    options: [
+      { label: 'Go back', next: 'post_vote_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+  post_vote_nota: {
+    id: 'post_vote_nota', step: 'NOTA', vrl: 95,
+    context: 'Understanding the NOTA (None Of The Above) option.',
+    guidance: 'NOTA is a valid voting option available on every EVM in India since 2013.',
+    actions: [
+      'NOTA is the last button on the Ballot Unit.',
+      'It allows you to officially register that you do not support any candidate.',
+      'NOTA votes are counted and reported in the results.',
+      'However, even if NOTA gets the most votes, the candidate with the next highest count wins.',
+      'NOTA is a form of democratic expression — it signals voter dissatisfaction.'
+    ],
+    critical: 'Choosing NOTA is completely valid and maintains the secrecy of your ballot. Nobody can know you chose NOTA.',
+    options: [
+      { label: 'Go back', next: 'post_vote_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  },
+
+  // === UNSURE ===
+  unsure_1: {
+    id: 'unsure_1', step: 'Getting Started', vrl: 5,
+    context: 'No worries — let me help you figure out where you stand.',
+    guidance: 'Answer a couple of quick questions and I will guide you to the right place.',
+    actions: [
+      'First, check if you have a Voter ID (EPIC card) — it is a blue/red card with your photo and an EPIC number.',
+      'If yes, your name is likely on the voter list. We can verify.',
+      'If no, you may need to register for the first time.',
+      'If you had one but lost it, you can get a duplicate.'
+    ],
+    critical: 'Not having a Voter ID does not necessarily mean you cannot vote. 11 other photo IDs are accepted at the booth.',
+    options: [
+      { label: 'I have a Voter ID', next: 'missing_1' },
+      { label: 'I do not have a Voter ID', next: 'first_time_1' },
+      { label: 'I had one but lost it', next: 'docs_1' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+
+  // === DOCUMENTS ===
+  docs_1: {
+    id: 'docs_1', step: 'Accepted Documents', vrl: 50,
+    context: 'Here are all the identity documents accepted at the polling booth.',
+    guidance: 'You do NOT need your Voter ID (EPIC) to vote. Any ONE of the following 12 documents is accepted.',
+    actions: [
+      '1. EPIC (Voter ID Card)',
+      '2. Aadhaar Card',
+      '3. Passport',
+      '4. Driving License',
+      '5. PAN Card',
+      '6. Service ID (Government / PSU employees)',
+      '7. MNREGA Job Card',
+      '8. Health Insurance Smart Card (under Ayushman Bharat)',
+      '9. Bank / Post Office Passbook with Photo',
+      '10. Smart Card issued by RGI under NPR',
+      '11. Pension document with photograph',
+      '12. Official ID by MP / MLA / MLC'
+    ],
+    critical: 'The document must have your photograph. Carry the original, not a photocopy.',
+    options: [
+      { label: 'I have one of these — help me prepare for election day', next: 'first_time_ready' },
+      { label: 'I do not have any of these documents', next: 'docs_none' },
+      { label: 'Go back', next: 'init' }
+    ]
+  },
+  docs_none: {
+    id: 'docs_none', step: 'No Documents', vrl: 15,
+    context: 'If you do not have any of the accepted photo IDs, here is what you can do.',
+    guidance: 'You need at least one valid photo ID to vote. Here is how to obtain one.',
+    actions: [
+      'Aadhaar Card: Visit your nearest Aadhaar Enrollment Center. It is free.',
+      'Voter ID (EPIC): Apply via Form 6 on voters.eci.gov.in.',
+      'Driving License: Apply at your nearest RTO or via Parivahan (parivahan.gov.in).',
+      'PAN Card: Apply online at incometax.gov.in (costs Rs. 107).',
+      'Start with Aadhaar — it is the fastest and most widely useful.'
+    ],
+    critical: 'Getting an Aadhaar takes 2–4 weeks. Start immediately if an election is approaching.',
+    options: [
+      { label: 'Start voter registration', next: 'first_time_2' },
+      { label: 'Go back', next: 'docs_1' },
+      { label: 'Start over', next: 'init' }
+    ]
+  }
+};
+
+const STATES_DATA = [
+  'Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat',
+  'Haryana','Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh',
+  'Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab',
+  'Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh',
+  'Uttarakhand','West Bengal','Delhi','Jammu & Kashmir','Ladakh','Chandigarh',
+  'Puducherry','Andaman & Nicobar Islands','Dadra & Nagar Haveli and Daman & Diu','Lakshadweep'
+];
+
+// Globals: FLOW_DATA, STATES_DATA
+
+// VOTEमित्र — VRL (Voter Readiness Level) Module
+// depends on: nothing
+class VRLTracker {
+  constructor(containerId) {
+    this.container = document.getElementById(containerId);
+    this.currentVRL = 0;
+    this.targetVRL = 0;
+    this.currentStep = 'Start';
+    this.animationFrame = null;
+    this.render();
+  }
+
+  getStageInfo(vrl) {
+    if (vrl <= 30) return { label: 'Getting Started', color: '#ef4444', glow: 'rgba(239,68,68,0.3)' };
+    if (vrl <= 60) return { label: 'In Progress', color: '#f59e0b', glow: 'rgba(245,158,11,0.3)' };
+    if (vrl <= 90) return { label: 'Almost Ready', color: '#3b82f6', glow: 'rgba(59,130,246,0.3)' };
+    return { label: 'Fully Prepared', color: '#10b981', glow: 'rgba(16,185,129,0.3)' };
+  }
+
+  render() {
+    const stage = this.getStageInfo(this.currentVRL);
+    this.container.innerHTML = `
+      <div class="vrl-widget">
+        <div class="vrl-gauge-wrap">
+          <svg class="vrl-gauge" viewBox="0 0 120 120">
+            <circle class="vrl-track" cx="60" cy="60" r="52" />
+            <circle class="vrl-fill" cx="60" cy="60" r="52"
+              stroke="${stage.color}"
+              stroke-dasharray="${(this.currentVRL / 100) * 326.73} 326.73"
+              filter="url(#glow)" />
+            <defs>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+          </svg>
+          <div class="vrl-value" style="color:${stage.color}">${Math.round(this.currentVRL)}%</div>
+        </div>
+        <div class="vrl-info">
+          <div class="vrl-label">Voter Readiness</div>
+          <div class="vrl-stage" style="color:${stage.color}">${stage.label}</div>
+          <div class="vrl-step">Step: ${this.currentStep}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  update(newVRL, stepName) {
+    this.targetVRL = Math.min(100, Math.max(0, newVRL));
+    this.currentStep = stepName || this.currentStep;
+    this._animate();
+  }
+
+  _animate() {
+    if (this.animationFrame) cancelAnimationFrame(this.animationFrame);
+    const step = () => {
+      const diff = this.targetVRL - this.currentVRL;
+      if (Math.abs(diff) < 0.5) {
+        this.currentVRL = this.targetVRL;
+        this.render();
+        return;
+      }
+      this.currentVRL += diff * 0.08;
+      this.render();
+      this.animationFrame = requestAnimationFrame(step);
+    };
+    step();
+  }
+}
+
+// Global: VRLTracker
+
+// VOTEमित्र — Flow Engine
+// depends on: data.js (FLOW_DATA)
+class FlowEngine {
+  constructor(onNavigate) {
+    this.history = [];
+    this.currentNodeId = null;
+    this.onNavigate = onNavigate;
+  }
+
+  start() {
+    this.history = [];
+    this.navigateTo('init');
+  }
+
+  navigateTo(nodeId) {
+    if (!FLOW_DATA[nodeId]) return;
+    if (this.currentNodeId && this.currentNodeId !== nodeId) {
+      this.history.push(this.currentNodeId);
+    }
+    this.currentNodeId = nodeId;
+    const node = FLOW_DATA[nodeId];
+    if (this.onNavigate) this.onNavigate(node, this.history);
+  }
+
+  goBack() {
+    if (this.history.length === 0) return;
+    const prevId = this.history.pop();
+    this.currentNodeId = prevId;
+    const node = FLOW_DATA[prevId];
+    if (this.onNavigate) this.onNavigate(node, this.history);
+  }
+
+  canGoBack() {
+    return this.history.length > 0;
+  }
+
+  getCurrentNode() {
+    return FLOW_DATA[this.currentNodeId];
+  }
+
+  getBreadcrumbs() {
+    const crumbs = this.history.map(id => ({
+      id,
+      label: FLOW_DATA[id]?.step || id
+    }));
+    if (this.currentNodeId) {
+      crumbs.push({
+        id: this.currentNodeId,
+        label: FLOW_DATA[this.currentNodeId]?.step || this.currentNodeId,
+        active: true
+      });
+    }
+    return crumbs;
+  }
+}
+
+// Global: FlowEngine
+
+// VOTEमित्र — Location Engine
+// depends on: data.js (STATES_DATA)
+class LocationEngine {
+  constructor() {
+    this.selectedState = null;
+    this.selectedCity = null;
+  }
+
+  getStates() {
+    return STATES_DATA;
+  }
+
+  setLocation(state, city) {
+    this.selectedState = state;
+    this.selectedCity = city || null;
+  }
+
+  getLocation() {
+    return { state: this.selectedState, city: this.selectedCity };
+  }
+
+  getLocationLabel() {
+    if (!this.selectedState) return 'Location not set';
+    return this.selectedCity
+      ? `${this.selectedCity}, ${this.selectedState}`
+      : this.selectedState;
+  }
+
+  renderSelector(containerId, onSelect) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = `
+      <div class="location-selector">
+        <label class="loc-label">Select Your State / UT</label>
+        <select id="state-select" class="loc-select">
+          <option value="">-- Choose State --</option>
+          ${STATES_DATA.map(s => `<option value="${s}" ${this.selectedState === s ? 'selected' : ''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    `;
+    document.getElementById('state-select').addEventListener('change', (e) => {
+      this.selectedState = e.target.value || null;
+      if (onSelect) onSelect(this.getLocation());
+    });
+  }
+}
+
+// Global: LocationEngine
+
+// VOTEमित्र — Main App Controller
+// depends on: data.js, vrl.js, flowEngine.js, locationEngine.js
+
+class App {
+  constructor() {
+    this.flowEngine = new FlowEngine((node, history) => this.renderNode(node, history));
+    this.vrl = null;
+    this.location = new LocationEngine();
+    this.heroVisible = true;
+  }
+
+  init() {
+    this.vrl = new VRLTracker('vrl-container');
+    this.bindHero();
+  }
+
+  bindHero() {
+    const btn = document.getElementById('hero-start-btn');
+    if (btn) {
+      btn.addEventListener('click', () => this.startJourney());
+    }
+  }
+
+  startJourney() {
+    const hero = document.getElementById('hero-section');
+    const main = document.getElementById('main-app');
+    hero.classList.add('hero-exit');
+    setTimeout(() => {
+      hero.style.display = 'none';
+      main.classList.add('app-visible');
+      this.flowEngine.start();
+    }, 600);
+  }
+
+  renderNode(node, history) {
+    this.vrl.update(node.vrl, node.step);
+    this.renderBreadcrumbs(history, node);
+    this.renderContent(node);
+    this.renderBackButton();
+  }
+
+  renderBreadcrumbs() {
+    const crumbs = this.flowEngine.getBreadcrumbs();
+    const el = document.getElementById('breadcrumbs');
+    if (crumbs.length <= 1) {
+      el.innerHTML = '';
+      return;
+    }
+    el.innerHTML = crumbs.map((c, i) =>
+      `<span class="crumb ${c.active ? 'crumb-active' : 'crumb-link'}"
+            ${!c.active ? `data-id="${c.id}"` : ''}>${c.label}</span>${i < crumbs.length - 1 ? '<span class="crumb-sep">›</span>' : ''}`
+    ).join('');
+
+    el.querySelectorAll('.crumb-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const targetId = link.dataset.id;
+        // Navigate back to that point
+        while (this.flowEngine.currentNodeId !== targetId && this.flowEngine.canGoBack()) {
+          this.flowEngine.goBack();
+        }
+      });
+    });
+  }
+
+  renderContent(node) {
+    const content = document.getElementById('flow-content');
+    content.classList.remove('content-enter');
+    void content.offsetWidth; // force reflow
+    content.classList.add('content-enter');
+
+    const isInit = node.id === 'init';
+
+    content.innerHTML = `
+      <div class="status-bar">
+        <span class="status-step">Step: ${node.step}</span>
+        <span class="status-vrl">Readiness: ${node.vrl}%</span>
+      </div>
+
+      <div class="context-block">
+        <div class="context-label">Your Current Position</div>
+        <p class="context-text">${node.context}</p>
+      </div>
+
+      <div class="guidance-block">
+        <div class="guidance-label">${isInit ? 'How It Works' : 'Guidance'}</div>
+        <p class="guidance-text">${node.guidance}</p>
+      </div>
+
+      ${node.actions.length > 0 ? `
+        <div class="actions-block">
+          <div class="actions-label">${isInit ? '' : 'Action Steps'}</div>
+          <ol class="actions-list">
+            ${node.actions.map((a, i) => `<li class="action-item" style="animation-delay:${i * 80}ms">${a}</li>`).join('')}
+          </ol>
+        </div>
+      ` : ''}
+
+      ${node.critical ? `
+        <div class="critical-block">
+          <div class="critical-icon">!</div>
+          <div class="critical-content">
+            <div class="critical-label">Important</div>
+            <p class="critical-text">${node.critical}</p>
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="options-block">
+        <div class="options-label">${isInit ? 'Choose Your Situation' : 'What would you like to do next?'}</div>
+        <div class="options-grid ${isInit ? 'options-init' : ''}">
+          ${node.options.map((opt, i) => `
+            <button class="option-card" data-next="${opt.next}" style="animation-delay:${i * 100 + 200}ms">
+              <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+              <span class="option-text">${opt.label}</span>
+              <span class="option-arrow">→</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+
+    content.querySelectorAll('.option-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.add('option-pressed');
+        setTimeout(() => {
+          this.flowEngine.navigateTo(card.dataset.next);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 200);
+      });
+    });
+  }
+
+  renderBackButton() {
+    const el = document.getElementById('back-btn');
+    if (this.flowEngine.canGoBack()) {
+      el.style.display = 'flex';
+      el.onclick = () => this.flowEngine.goBack();
+    } else {
+      el.style.display = 'none';
+    }
+  }
+}
+
+// Boot
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new App();
+  app.init();
+});
+
+  </script>
+</body>
+</html>
